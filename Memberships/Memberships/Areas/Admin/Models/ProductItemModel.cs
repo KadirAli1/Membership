@@ -16,12 +16,8 @@ namespace Memberships.Areas.Admin.Models
         [DisplayName("Product Title")]
         public string ProductTitle { get; set; }
         [DisplayName("Item Title")]
-        public string SubscriptionTitle { get; set; }
-      
+        public string ItemTitle { get; set; }
         public ICollection<Product> Products { get; set; }
-
         public ICollection<Item> Items { get; set; }
-        public List<Subscription> Subscriptions { get; internal set; }
-        public int SubscriptionId { get; internal set; }
     }
 }
