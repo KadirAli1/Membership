@@ -1,31 +1,37 @@
-﻿@{
+﻿@model IEnumerable<Memberships.Models.ThumbnailAreaModel>
+
+@{
     ViewBag.Title = "Home Page";
 }
-
-@if (User.Identity.IsAuthenticated)
-{
     <div class="row">
-        <div class="col-md-xs-12">
-            <h2>I'm Logged in</h2>
-        </div>
 
-    </div>
+        @if (User.Identity.IsAuthenticated)
+        {
 
-}
-else
-{
-    //Left column
-    <div class="row">
-        <div class="col-lg-9 col-md-8 col-sm-7">
-            <h2>I'm not Logged in</h2>
-        </div>
-    </div>
-    //Right column
-    <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-5">
+            foreach(var area in Model)
+            {
+
            
-        </div>
+           @Html.Partial("_ThumbnailAreaPartial",area)
+
+                }  
+
+
+        }
+        else
+        {
+            //Left column
+            <div class="row">
+                <div class="col-lg-9 col-md-8 col-sm-7">
+                    <h2>I'm not Logged in</h2>
+                </div>
+            </div>
+            //Right column
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-5">
+
+                </div>
+            </div>
+
+        }
     </div>
-
-}
-
