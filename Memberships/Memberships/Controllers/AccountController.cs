@@ -771,6 +771,61 @@ namespace Memberships.Controllers
             }
             catch { }
             return RedirectToAction("Subscriptions", "Account", new { userId = userId });
+
+
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+
+        public async Task<ActionResult> RegisterUserAsync(RegisterUserModel model)
+        {
+            model.AcceptUserAgreement = true;
+
+            if (ModelState.IsValid)
+            {
+               
+
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.Name,
+                    IsActive = true,
+                    Registered = DateTime.Now,
+                    EmailConfirmed = true
+
+                };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return PartialView("_RegisterUserPartial", model);
+                }
+                AddUserError(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return PartialView("_RegisterUserPartial", model);
+        }
+        private void AddUserError(IdentityResult result)
+        {
+            foreach(var error in result.Errors)
+            {
+                if (error.StartsWith("Name") &&
+                    error.EndsWith("is already taken."))
+                    continue;
+
+                ModelState.AddModelError("", error);
+            }
         }
     }
 }

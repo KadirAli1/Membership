@@ -32,7 +32,9 @@ namespace Memberships
             bundles.Add(new ScriptBundle("~/bundles/ui").Include(
                      "~/Scripts/carret.js",
                      "~/Scripts/JWPlayer.js",
-                     "~/Scripts/RegisterCode.js"));
+                     "~/Scripts/RegisterCode.js",
+                     "~/Scripts/RegisterUser.js"
+                     ));
 
 
             bundles.Add(new StyleBundle("~/Content/membership").Include(
@@ -40,7 +42,8 @@ namespace Memberships
                        "~/Content/thumbnails.css",
                        "~/Content/ProductContent.css",
                        "~/Content/carret.css",
-                       "~/Content/RegisterCode.css"));
+                       "~/Content/RegisterCode.css",
+                       "~/Content/RegisterUser.css"));
 
 
         }
