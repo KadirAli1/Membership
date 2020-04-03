@@ -58,7 +58,7 @@ namespace Memberships.Extensions
                         Title = p.Title,
                         Description = p.Description,
                         ImageUrl = p.ImageUrl,
-                        Link = "/ProductContent/Index" + p.Id,
+                        Link = "/ProductContent/Index/" + p.Id,
                         TagText = plt.Title,
                         ContentTag = pt.Title
 
