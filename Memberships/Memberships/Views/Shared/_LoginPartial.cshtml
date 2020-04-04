@@ -21,12 +21,18 @@ else
     <ul class="nav navbar-nav navbar-right">
         <li>
             @Html.GlyphLink("Account", "Login", "Log in", "user", "", "loginLink")
+        
             <div class="hidden-xs" login-panel-partial>
                 @Html.Partial("_LoginPanelPartial", new LoginViewModel
            {
                Email="", Password = "",RememberMe = false
            })
             </div>
+        </li>
+        <li>
+
+            @Html.GlyphLink("", "", "Pwd", "lock", "", "pwdLink", new Dictionary<string, string>
+                { {"data-toggle","modal"},{ "data-target","#pwdModal"} })
         </li>
     </ul>
 }
